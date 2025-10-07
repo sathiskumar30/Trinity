@@ -8,17 +8,15 @@ const { Pool } = pkg
 
 const app = express()
 
-// CORS: allow frontend origin
 const ORIGIN = process.env.CORS_ORIGIN || "*"
 app.use(cors({ origin: ORIGIN }))
 
 app.use(express.json())
 app.use(morgan("dev"))
 
-// Postgres connection via DATABASE_URL or discrete vars
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  host: process.env.PGHOST,
+  host: process.env.PGHOST, 
   port: process.env.PGPORT ? Number(process.env.PGPORT) : undefined,
   user: process.env.PGUSER,
   password: process.env.PGPASSWORD,
@@ -26,17 +24,7 @@ const pool = new Pool({
   ssl: process.env.PGSSL === "true" ? { rejectUnauthorized: false } : undefined,
 })
 
-// const pool = new Pool({
-//   host: process.env.PGHOST,
-//   port: process.env.PGPORT ? Number(process.env.PGPORT) : 5432,
-//   user: process.env.PGUSER,
-//   password: process.env.PGPASSWORD,
-//   database: process.env.PGDATABASE,
-//   ssl: process.env.PGSSL === "true" ? { rejectUnauthorized: false } : false,
-// });
 
-
-// Ensure table exists on boot
 async function ensureSchema() {
   await pool.query(`
     CREATE TABLE IF NOT EXISTS ideas (

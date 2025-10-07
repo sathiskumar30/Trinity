@@ -2,6 +2,7 @@
   "name": "IdeaBoard",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "next build",
     "dev": "next dev",
@@ -45,7 +46,7 @@
     "cmdk": "1.0.4",
     "cors": "latest",
     "date-fns": "4.1.0",
-    "dotenv": "latest",
+    "dotenv": "^17.2.3",
     "embla-carousel-react": "8.5.1",
     "express": "latest",
     "geist": "latest",
